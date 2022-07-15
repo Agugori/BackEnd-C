@@ -6,10 +6,10 @@ import { getLocation,
 export const router = Router();
 
 router.get('/', (req, res) => {
-    res.status(200).json({estado: 'Cargando...'})
+    res.status(200).json( { status: 'Cargando...' } )
 })
 router.get('/location', getLocation )
-router.get('/location/:city?', getCurrentLocation )
-router.get('/location/:city?', getForecastCurrentCity )
+router.get('/current/:city?', getCurrentLocation )
+router.get('/forecast/:city?', getForecastCurrentCity )
 
 export default router;
