@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon dist/index.js",
-    "test": "mocha"
+    "test": "mocha ./node_modules/mocha/bin/mocha"
   },
   "author": "Agustín",
   "license": "ISC",
@@ -16,6 +16,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "mocha": "^10.0.0",
     "node-fetch": "^2.6.1",
     "public-ip": "^6.0.1",
     "remove-accents": "^0.4.2"
