@@ -42,9 +42,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getForecastCurrentCity = exports.getCurrentLocation = exports.getLocation = void 0;
 var express_1 = require("express");
 var remove_accents_1 = __importDefault(require("remove-accents"));
-var getCity_js_1 = require("./getCity.js");
-var getForecast_js_1 = require("./getForecast.js");
-var getWeather_js_1 = require("./getWeather.js");
+var getCity_1 = require("./getCity");
+var getForecast_1 = require("./getForecast");
+var getWeather_1 = require("./getWeather");
 var getLocation = function (req, res) {
     if (req === void 0) { req = express_1.request; }
     if (res === void 0) { res = express_1.response; }
@@ -54,7 +54,7 @@ var getLocation = function (req, res) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, (0, getCity_js_1.getCity)()];
+                    return [4 /*yield*/, (0, getCity_1.getCity)()];
                 case 1:
                     ip = _a.sent();
                     res.status(200).json({
@@ -87,12 +87,12 @@ var getCurrentLocation = function (req, res) {
                 case 1:
                     _a.trys.push([1, 5, , 6]);
                     if (!!city) return [3 /*break*/, 3];
-                    return [4 /*yield*/, (0, getCity_js_1.getCity)()];
+                    return [4 /*yield*/, (0, getCity_1.getCity)()];
                 case 2:
                     ip = _a.sent();
                     city = (0, remove_accents_1.default)(ip.city);
                     _a.label = 3;
-                case 3: return [4 /*yield*/, (0, getWeather_js_1.getWeather)((0, remove_accents_1.default)(city))];
+                case 3: return [4 /*yield*/, (0, getWeather_1.getWeather)((0, remove_accents_1.default)(city))];
                 case 4:
                     openWeatherMap = _a.sent();
                     if (openWeatherMap) {
@@ -130,12 +130,12 @@ var getForecastCurrentCity = function (req, res) {
                 case 1:
                     _a.trys.push([1, 5, , 6]);
                     if (!!city) return [3 /*break*/, 3];
-                    return [4 /*yield*/, (0, getCity_js_1.getCity)()];
+                    return [4 /*yield*/, (0, getCity_1.getCity)()];
                 case 2:
                     ip = _a.sent();
                     city = (0, remove_accents_1.default)(ip.city);
                     _a.label = 3;
-                case 3: return [4 /*yield*/, (0, getForecast_js_1.getForecast)((0, remove_accents_1.default)(city))];
+                case 3: return [4 /*yield*/, (0, getForecast_1.getForecast)((0, remove_accents_1.default)(city))];
                 case 4:
                     openWeatherMap = _a.sent();
                     if (openWeatherMap) {

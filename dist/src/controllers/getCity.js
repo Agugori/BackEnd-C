@@ -41,23 +41,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCity = void 0;
 var axios_1 = __importDefault(require("axios"));
-var getCity = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var ip, ipCity, error_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                ip = '24.48.0.1';
-                return [4 /*yield*/, axios_1.default.get("".concat(process.env.BASEURL_IPAPI).concat(ip))];
-            case 1:
-                ipCity = _a.sent();
-                return [2 /*return*/, ipCity.data];
-            case 2:
-                error_1 = _a.sent();
-                return [2 /*return*/, { error: error_1 }];
-            case 3: return [2 /*return*/];
-        }
+var public_ip_1 = __importDefault(require("public-ip"));
+function getCity() {
+    return __awaiter(this, void 0, void 0, function () {
+        var ip, api, error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 3, , 4]);
+                    return [4 /*yield*/, public_ip_1.default.v4()];
+                case 1:
+                    ip = _a.sent();
+                    return [4 /*yield*/, axios_1.default.get("".concat(process.env.BASEURL_IPAPI, "/").concat(ip))];
+                case 2:
+                    api = _a.sent();
+                    return [2 /*return*/, api.data];
+                case 3:
+                    error_1 = _a.sent();
+                    return [2 /*return*/, { error: error_1 }];
+                case 4: return [2 /*return*/];
+            }
+        });
     });
-}); };
+}
 exports.getCity = getCity;
 //# sourceMappingURL=getCity.js.map

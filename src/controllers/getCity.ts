@@ -2,16 +2,15 @@ import axios from 'axios';
 import publicIp from 'public-ip';
 
 
-const getCity = async () => {
+export async function getCity() {
     try {
-        // const ip = publicIp.v4();
-        const ip = '24.48.0.1';
-        const ipCity = await axios.get(`${process.env.BASEURL_IPAPI}${ip}`)
-        return ipCity.data;
+        const ip = await publicIp.v4();
+
+        const api = await axios.get(`${ process.env.BASEURL_IPAPI}/${ ip }`);
+
+        return api.data;
     } catch (error) {
         return {error}
     }
 }
-export {
-    getCity
-} 
+ 

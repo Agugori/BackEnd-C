@@ -1,15 +1,16 @@
 import { request, response } from "express";
 import accents from 'remove-accents';
 
-import { getCity } from "./getCity.js";
-import { getForecast } from "./getForecast.js";
-import { getWeather } from "./getWeather.js";
+import { getCity } from "./getCity";
+import { getForecast } from "./getForecast";
+import { getWeather } from "./getWeather";
 
 
 
 const getLocation = async (req = request, res = response) => {
     try {
         const ip = await getCity();
+
         res.status(200).json({
             ip
         })
