@@ -15,7 +15,7 @@ class Server {
         //Aplicacion express
         this.app = express();
         this.geoPath = '/v1';
-        this.port = process.env.PORT || '3000';
+        this.port = process.env.PORT || '8000';
         
         //Middleware
         this.middlewares();

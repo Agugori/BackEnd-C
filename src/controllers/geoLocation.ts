@@ -1,7 +1,7 @@
 import { request, response } from "express";
 import accents from 'remove-accents';
 
-import {getCity} from "./getCity.js";
+import { getCity } from "./getCity.js";
 import { getForecast } from "./getForecast.js";
 import { getWeather } from "./getWeather.js";
 
@@ -13,7 +13,8 @@ const getLocation = async (req = request, res = response) => {
         res.status(200).json({
             ip
         })
-    } catch (error) {
+    }
+    catch (error) {
         console.log(error)
         res.status(500).json({
             msg: 'Contacte al administrador'

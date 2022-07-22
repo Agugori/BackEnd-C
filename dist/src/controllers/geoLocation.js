@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,74 +8,156 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { request, response } from "express";
-import accents from 'remove-accents';
-import { getCity } from "./getCity.js";
-import { getForecast } from "./getForecast.js";
-import { getWeather } from "./getWeather.js";
-const getLocation = (req = request, res = response) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const ip = yield getCity();
-        res.status(200).json({
-            ip
-        });
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
-    catch (error) {
-        console.log(error);
-        res.status(500).json({
-            msg: 'Contacte al administrador'
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getForecastCurrentCity = exports.getCurrentLocation = exports.getLocation = void 0;
+var express_1 = require("express");
+var remove_accents_1 = __importDefault(require("remove-accents"));
+var getCity_js_1 = require("./getCity.js");
+var getForecast_js_1 = require("./getForecast.js");
+var getWeather_js_1 = require("./getWeather.js");
+var getLocation = function (req, res) {
+    if (req === void 0) { req = express_1.request; }
+    if (res === void 0) { res = express_1.response; }
+    return __awaiter(void 0, void 0, void 0, function () {
+        var ip, error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, (0, getCity_js_1.getCity)()];
+                case 1:
+                    ip = _a.sent();
+                    res.status(200).json({
+                        ip: ip
+                    });
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_1 = _a.sent();
+                    console.log(error_1);
+                    res.status(500).json({
+                        msg: 'Contacte al administrador'
+                    });
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
         });
-    }
-});
-const getCurrentLocation = (req = request, res = response) => __awaiter(void 0, void 0, void 0, function* () {
-    let { city } = req.params;
-    let ip;
-    try {
-        if (!city) {
-            ip = yield getCity();
-            city = accents(ip.city);
-        }
-        const openWeatherMap = yield getWeather(accents(city));
-        if (openWeatherMap) {
-            return res.status(200).json({
-                openWeatherMap
-            });
-        }
-        res.status(404).json({
-            msg: 'Ciudad no encontrada'
+    });
+};
+exports.getLocation = getLocation;
+var getCurrentLocation = function (req, res) {
+    if (req === void 0) { req = express_1.request; }
+    if (res === void 0) { res = express_1.response; }
+    return __awaiter(void 0, void 0, void 0, function () {
+        var city, ip, openWeatherMap, error_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    city = req.params.city;
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 5, , 6]);
+                    if (!!city) return [3 /*break*/, 3];
+                    return [4 /*yield*/, (0, getCity_js_1.getCity)()];
+                case 2:
+                    ip = _a.sent();
+                    city = (0, remove_accents_1.default)(ip.city);
+                    _a.label = 3;
+                case 3: return [4 /*yield*/, (0, getWeather_js_1.getWeather)((0, remove_accents_1.default)(city))];
+                case 4:
+                    openWeatherMap = _a.sent();
+                    if (openWeatherMap) {
+                        return [2 /*return*/, res.status(200).json({
+                                openWeatherMap: openWeatherMap
+                            })];
+                    }
+                    res.status(404).json({
+                        msg: 'Ciudad no encontrada'
+                    });
+                    return [3 /*break*/, 6];
+                case 5:
+                    error_2 = _a.sent();
+                    console.log(error_2);
+                    res.status(500).json({
+                        msg: 'Contacte al administrador'
+                    });
+                    return [3 /*break*/, 6];
+                case 6: return [2 /*return*/];
+            }
         });
-    }
-    catch (error) {
-        console.log(error);
-        res.status(500).json({
-            msg: 'Contacte al administrador'
+    });
+};
+exports.getCurrentLocation = getCurrentLocation;
+var getForecastCurrentCity = function (req, res) {
+    if (req === void 0) { req = express_1.request; }
+    if (res === void 0) { res = express_1.response; }
+    return __awaiter(void 0, void 0, void 0, function () {
+        var city, ip, openWeatherMap, error_3;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    city = req.params.city;
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 5, , 6]);
+                    if (!!city) return [3 /*break*/, 3];
+                    return [4 /*yield*/, (0, getCity_js_1.getCity)()];
+                case 2:
+                    ip = _a.sent();
+                    city = (0, remove_accents_1.default)(ip.city);
+                    _a.label = 3;
+                case 3: return [4 /*yield*/, (0, getForecast_js_1.getForecast)((0, remove_accents_1.default)(city))];
+                case 4:
+                    openWeatherMap = _a.sent();
+                    if (openWeatherMap) {
+                        return [2 /*return*/, res.status(200).json({
+                                openWeatherMap: openWeatherMap
+                            })];
+                    }
+                    res.status(404).json({
+                        msg: 'Ciudad no encontrada'
+                    });
+                    return [3 /*break*/, 6];
+                case 5:
+                    error_3 = _a.sent();
+                    console.log(error_3);
+                    res.status(500).json({
+                        msg: 'Contacte al administrador'
+                    });
+                    return [3 /*break*/, 6];
+                case 6: return [2 /*return*/];
+            }
         });
-    }
-});
-const getForecastCurrentCity = (req = request, res = response) => __awaiter(void 0, void 0, void 0, function* () {
-    let { city } = req.params;
-    let ip;
-    try {
-        if (!city) {
-            ip = yield getCity();
-            city = accents(ip.city);
-        }
-        const openWeatherMap = yield getForecast(accents(city));
-        if (openWeatherMap) {
-            return res.status(200).json({
-                openWeatherMap
-            });
-        }
-        res.status(404).json({
-            msg: 'Ciudad no encontrada'
-        });
-    }
-    catch (error) {
-        console.log(error);
-        res.status(500).json({
-            msg: 'Contacte al administrador'
-        });
-    }
-});
-export { getLocation, getCurrentLocation, getForecastCurrentCity };
+    });
+};
+exports.getForecastCurrentCity = getForecastCurrentCity;
 //# sourceMappingURL=geoLocation.js.map
